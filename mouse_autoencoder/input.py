@@ -2,11 +2,8 @@ import boto3
 import botocore
 import os
 
-dataset_url = "https://github.com/falcowinkler/n-maps-dataset/raw/master/n_maps.tfrecord"
-
 
 def download_if_not_present():
-
     path_to_file = os.getcwd() + "/PBMC.csv"
 
     if os.path.isfile(path_to_file):
