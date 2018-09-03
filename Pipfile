@@ -8,9 +8,9 @@ tensorflow = "*"
 boto3 = "*"
 numpy = "==1.14.5"
 mouse-autoencoder = {editable = true, path = "."}
-pytest = "*"
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.6"
