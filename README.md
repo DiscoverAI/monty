@@ -15,7 +15,7 @@ Make sure you have pipenv and python 3.6.0 installed.
 
 Then just run:
 ```bash
-pipenv install
+pipenv install --dev
 ```
 
 ## Test
