@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 def download_if_not_present():
     s3bucket = 'pbmcasinglecell/'
     key = 'PBMC.csv'
-    local_file_path = 'resources/PBMC.csv'
+    local_file_path = '../resources/PBMC.csv'
 
     if not os.path.isfile(local_file_path):
         logging.info('downloading dataset')
