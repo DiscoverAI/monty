@@ -5,12 +5,13 @@ name = "pypi"
 
 [packages]
 tensorflow = "*"
-boto3 = "*"
 numpy = "==1.14.5"
+s3fs = "*"
 monty = {editable = true, path = "."}
 
 [dev-packages]
 pytest = "*"
+pytest-mock = "*"
 
 [requires]
 python_version = "3.6"
