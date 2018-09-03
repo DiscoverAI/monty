@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a55e80d0eb97f3b345f461c7e413892a97363c15f6100564e14668ed31a077a0"
+            "sha256": "a36ae60db731b9e46cd4d985fe1b9415ab27f9e241af1b58b31727c59f9573aa"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -10,7 +10,7 @@
         "sources": [
             {
                 "name": "pypi",
-                "url": "https://pypi.python.org/simple",
+                "url": "https://pypi.org/simple",
                 "verify_ssl": true
             }
         ]
@@ -110,7 +110,7 @@
             ],
             "version": "==2.6.11"
         },
-        "mouse-autoencoder": {
+        "monty": {
             "editable": true,
             "path": "."
         },
