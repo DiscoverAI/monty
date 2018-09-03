@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from monty import data
 
 if __name__ == '__main__':

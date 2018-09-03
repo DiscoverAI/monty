@@ -17,3 +17,15 @@ Then just run:
 ```bash
 pipenv install
 ```
+
+## Test
+Test it with:
+```bash
+pipenv run pytest
+```
+
+## Run
+Run it with:
+```bash
+pipenv run monty/main.py
+```
