@@ -9,7 +9,6 @@ numpy = "==1.14.5"
 s3fs = "*"
 monty = {editable = true, path = "."}
 pandas = "*"
-"e1839a8" = {path = ".", editable = true}
 
 [dev-packages]
 pytest = "*"
