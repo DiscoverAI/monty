@@ -14,7 +14,7 @@ def decoder(x):
 
 
 if __name__ == '__main__':
-    dataset_file_path = data.download_if_not_present('../resources/PBMC.csv')
+    dataset_file_path = data.download_if_not_present('resources/PBMC.csv')
     inputs = data.create_dataset(dataset_file_path,
                                  num_epochs=10,
                                  shuffle=True,
