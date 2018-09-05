@@ -14,8 +14,12 @@ def decoder(x):
 
 
 if __name__ == '__main__':
-    dataset_file_path = data.download_if_not_present()
-    inputs = data.create_dataset(dataset_file_path)
+    dataset_file_path = data.download_if_not_present('../resources/PBMC.csv')
+    inputs = data.create_dataset(dataset_file_path,
+                                 num_epochs=10,
+                                 shuffle=True,
+                                 batch_size=128,
+                                 shuffle_buffer_size=1000)
 
     ae_out = decoder(encoder(inputs))
     loss = tf.reduce_mean(tf.square(ae_out - inputs))
