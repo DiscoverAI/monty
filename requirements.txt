@@ -1,0 +1,9 @@
+-i https://pypi.org/simple
+atomicwrites==1.2.1; python_version != '3.3.*'
+attrs==18.2.0
+more-itertools==4.3.0
+pluggy==0.7.1; python_version != '3.3.*'
+py==1.6.0; python_version != '3.3.*'
+pytest-mock==1.10.0
+pytest==3.7.4
+six==1.11.0
