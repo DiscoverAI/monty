@@ -1,0 +1,33 @@
+-i https://pypi.org/simple
+atomicwrites==1.2.1; python_version != '3.3.*'
+attrs==18.2.0
+more-itertools==4.3.0
+pluggy==0.7.1; python_version != '3.3.*'
+py==1.6.0; python_version != '3.3.*'
+pytest-mock==1.10.0
+pytest==3.7.4
+six==1.11.0
+-e .
+absl-py==0.4.1
+astor==0.7.1
+boto3==1.8.7
+botocore==1.11.7
+docutils==0.14
+gast==0.2.0
+grpcio==1.14.2
+jmespath==0.9.3
+markdown==2.6.11
+numpy==1.14.5
+pandas==0.23.4
+protobuf==3.6.1
+python-dateutil==2.7.3
+pytz==2018.5
+s3fs==0.1.6
+s3transfer==0.1.13
+six==1.11.0
+tensorboard==1.10.0
+tensorflow==1.10.1
+termcolor==1.1.0
+urllib3==1.23
+werkzeug==0.14.1
+wheel==0.31.1; python_version >= '3'
