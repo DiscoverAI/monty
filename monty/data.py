@@ -20,7 +20,7 @@ def download_if_not_present(local_file_path):
     return local_file_path
 
 
-def create_dataset(csv_file, num_features, num_epochs, batch_size, shuffle, shuffle_buffer_size):
+def create_dataset(csv_file, num_features, num_epochs, shuffle, shuffle_buffer_size):
     dataset = tf.contrib.data.CsvDataset(csv_file,
                                          record_defaults=[tf.float32] * num_features,
                                          header=True,
@@ -28,8 +28,8 @@ def create_dataset(csv_file, num_features, num_epochs, batch_size, shuffle, shuf
     if shuffle:
         dataset = dataset.shuffle(shuffle_buffer_size)
 
-    return dataset \
-        .repeat(num_epochs) \
-        .batch(batch_size=batch_size, drop_remainder=True) \
-        .map(lambda *x: tf.stack(x)) \
-        .map(lambda x: tf.transpose(x))
+    return dataset.repeat(num_epochs).map(lambda *x: tf.stack(x)).map(lambda x: tf.transpose(x))
+
+
+def keep_non_zero(dataset):
+    return dataset.filter(lambda batch: tf.count_nonzero(batch) > 0)
