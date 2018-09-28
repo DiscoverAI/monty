@@ -36,8 +36,8 @@ def test_download_file_present(mocker):
 
 def test_create_dataset():
     sess = tf.Session()
-    iterator = data.create_dataset("test_resources/PBMC_test.csv", 5, 1, 1, False, None).make_one_shot_iterator()
+    iterator = data.create_dataset("test_resources/PBMC_test.csv", 5, 1, 2, False, None).make_one_shot_iterator()
     first_batch = sess.run(iterator.get_next())
 
-    assert first_batch.shape == (1, 5)
-    npt.assert_array_equal(first_batch, np.array([[2, 1, 0, 1, 0]], dtype=np.float32))
+    assert first_batch.shape == (2, 5)
+    npt.assert_array_equal(first_batch, np.array([[2, 1, 0, 1, 0], [0, 0, 0, 0, 0]], dtype=np.float32))
