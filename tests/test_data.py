@@ -1,6 +1,9 @@
 import os
 
+import numpy as np
+import numpy.testing as npt
 import tensorflow as tf
+
 from monty import data
 
 TEST_FILE_PATH = 'resources/PBMC_test.csv'
@@ -32,17 +35,9 @@ def test_download_file_present(mocker):
 
 
 def test_create_dataset():
-    iterator = data.create_dataset(
-        "test_resources/PBMC_test.csv",
-        num_epochs=1,
-        shuffle=False,
-        batch_size=4,
-        shuffle_buffer_size=None)
     sess = tf.Session()
-    with sess.as_default():
-        first_batch = sess.run(iterator)
-        assert first_batch.shape == (4, 2700)
-        assert first_batch[0][0] == 2
-        assert first_batch[0][1] == 1
-        assert first_batch[1][0] == 0
-        assert first_batch[1][1] == 1
+    iterator = data.create_dataset("test_resources/PBMC_test.csv", 5, 1, 1, False, None).make_one_shot_iterator()
+    first_batch = sess.run(iterator.get_next())
+
+    assert first_batch.shape == (1, 5)
+    npt.assert_array_equal(first_batch, np.array([[2, 1, 0, 1, 0]], dtype=np.float32))
