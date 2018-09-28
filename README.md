@@ -29,9 +29,21 @@ Run it with:
 ```bash
 pipenv run monty/main.py
 ```
-Run the notebooks:
+
+## Run notebooks
+### Install notebooks requirements
+```bash
+pipenv run pip install jupiter ipython
+```
+
+### Run the actual notebooks
+Install the kernel:
 ```bash
 ipython kernel install --user --name=monty
+```
+
+Run the notebooks:
+```bash
 jupyter notebook
 ```
 And change the kernel to monty when you have a notebook open.
