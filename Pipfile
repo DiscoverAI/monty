@@ -12,6 +12,7 @@ monty = {editable = true, path = "."}
 [dev-packages]
 pytest = "*"
 pytest-mock = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.6"
