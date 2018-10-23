@@ -1,0 +1,9 @@
+# default flags for monty. copy this file for new experiments and specify it with --flagfile=config/yourfile.txt
+--batch_size=128
+--num_epochs=10
+--learning_rate=0.0001
+--num_features=2700
+--dataset_path=resources/PBMC.csv
+--minimum_library_size=50
+--minimum_expressed_genes=20
+--impute_iterations=20
