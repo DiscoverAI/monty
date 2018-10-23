@@ -29,6 +29,15 @@ Run it with:
 ```bash
 pipenv run monty/main.py
 ```
+Hyperparameters and paths are configurable via a flagfile or via command
+line params. For example:
+```bash
+pipenv run monty/main.py --flagfile=config/default_flags.txt
+```
+```bash
+pipenv run monty/main.py --batch_size=64
+```
+All flags have default values set in `monty/main.py` 
 
 ## Run notebooks
 ### Install notebooks requirements
