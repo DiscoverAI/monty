@@ -1,6 +1,6 @@
 # Monty
 
-[![CircleCI](https://circleci.com/gh/DiscoverAI/mouse-autoencoder.svg?style=svg)](https://circleci.com/gh/DiscoverAI/mouse-autoencoder)
+[![CircleCI](https://circleci.com/gh/DiscoverAI/monty.svg?style=svg)](https://circleci.com/gh/DiscoverAI/monty)
 
 > If it's trouble you want, pally, you've come to the right mouse!
 >
@@ -37,7 +37,7 @@ pipenv run monty/main.py --flagfile=config/default_flags.txt
 ```bash
 pipenv run monty/main.py --batch_size=64
 ```
-All flags have default values set in `monty/main.py` 
+All flags have default values set in `monty/main.py`
 
 ## Run notebooks
 ### Install notebooks requirements
