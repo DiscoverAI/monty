@@ -37,7 +37,7 @@ pipenv run monty/main.py --flagfile=config/default_flags.txt
 ```bash
 pipenv run monty/main.py --batch_size=64
 ```
-All flags have default values set in `monty/main.py`
+All flags have default values set in `monty/__init__.py`
 
 ## Run notebooks
 ### Install notebooks requirements

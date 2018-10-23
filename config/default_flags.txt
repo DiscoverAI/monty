@@ -5,5 +5,5 @@
 --num_features=2700
 --dataset_path=resources/PBMC.csv
 --minimum_library_size=50
---minimum_expressed_genes=20
+--minimum_expressed_genes=10
 --impute_iterations=20

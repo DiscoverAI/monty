@@ -31,5 +31,7 @@ def create_dataset(csv_file, num_features, num_epochs, shuffle, shuffle_buffer_s
     return dataset.repeat(num_epochs).map(lambda *x: tf.stack(x)).map(lambda x: tf.transpose(x))
 
 
-def keep_non_zero(dataset):
-    return dataset.filter(lambda batch: tf.count_nonzero(batch) > 0)
+def drop_outliers(dataset, minimum_expressed_genes, minimum_library_size):
+    return dataset\
+        .filter(lambda batch: tf.count_nonzero(batch) >= minimum_expressed_genes) \
+        .filter(lambda batch: tf.reduce_sum(batch) >= minimum_library_size)

@@ -3,7 +3,6 @@ import os
 import numpy as np
 import numpy.testing as npt
 import tensorflow as tf
-
 from monty import data
 
 TEST_FILE_PATH = 'resources/PBMC_test.csv'
@@ -42,12 +41,12 @@ def test_create_dataset():
     npt.assert_array_equal(first_batch, np.array([[2, 1, 0, 1, 0], [0, 0, 0, 0, 0]], dtype=np.float32))
 
 
-def test_filter_zeros():
+def test_drop_outliers():
     sess = tf.Session()
     dataset = data.create_dataset("test_resources/PBMC_test.csv", 5, 1, False, None)
-    non_zeros = data.keep_non_zero(dataset)
-    iterator = non_zeros.batch(2).make_one_shot_iterator()
+    non_outliers = data.drop_outliers(dataset, minimum_expressed_genes=1, minimum_library_size=100)
+    iterator = non_outliers.batch(2).make_one_shot_iterator()
     first_batch = sess.run(iterator.get_next())
 
-    npt.assert_array_equal(first_batch, np.array([[2, 1, 0, 1, 0]], dtype=np.float32))
+    npt.assert_array_equal(first_batch, np.array([[41, 42, 43, 44, 45]], dtype=np.float32))
     assert first_batch.shape == (1, 5)
