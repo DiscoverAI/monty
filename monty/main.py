@@ -22,6 +22,7 @@ if __name__ == '__main__':
                                   shuffle=True,
                                   shuffle_buffer_size=1000)
     dataset = data.drop_outliers(dataset, FLAGS.minimum_expressed_genes, FLAGS.minimum_library_size)
+    dataset = data.normalize(dataset)
     iterator = dataset.batch(batch_size=FLAGS.batch_size, drop_remainder=True).make_one_shot_iterator()
 
     input = iterator.get_next()

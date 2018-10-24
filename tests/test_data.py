@@ -50,3 +50,13 @@ def test_drop_outliers():
 
     npt.assert_array_equal(first_batch, np.array([[41, 42, 43, 44, 45]], dtype=np.float32))
     assert first_batch.shape == (1, 5)
+
+
+def test_normalize_data():
+    sess = tf.Session()
+    dataset = data.create_dataset("test_resources/PBMC_test.csv", 5, 1, False, None)\
+        .batch(1)
+    dataset = data.normalize(dataset)
+    iterator = dataset.make_one_shot_iterator()
+    first_batch = sess.run(iterator.get_next())
+    npt.assert_allclose(first_batch[0], np.vectorize(lambda x: np.log(x + 1))([2, 1, 0, 1, 0]))
