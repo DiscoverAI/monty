@@ -27,3 +27,8 @@ tf.app.flags.DEFINE_integer('minimum_expressed_genes', 10,
                             in order to be processed""")
 tf.app.flags.DEFINE_integer('impute_iterations', 20,
                             """How many times the imputation should iterate at each step""")
+tf.app.flags.DEFINE_integer('mask_percentage', 20,
+                            """How many percent of nonzero measurements
+                            should be masked during imputing autoencoder training""")
+tf.app.flags.DEFINE_string('model_dir', 'out',
+                           """Directory for model persistence""")
