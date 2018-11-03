@@ -1,6 +1,6 @@
-from monty.input import *
-import tensorflow as tf
 import numpy as np
+import tensorflow as tf
+from monty.input import *
 
 
 def test_input_function():
@@ -15,14 +15,12 @@ def test_input_function():
                                             num_features=5,
                                             shuffle=False)
     x, y = noise_input_fn()
-    sess = tf.Session()
     expected = data.normalize_op(
         tf.constant(
             [[2, 1, 0, 1, 0],
              [0, 0, 0, 0, 0],
              [41, 42, 43, 44, 45]]
             , dtype=tf.float32))
-    x, y, expected = sess.run([x, y, expected])
     assert x.shape == (batch_size, 5)
     assert y.shape == (batch_size, 5)
     assert np.allclose(y, expected, atol=0.01)

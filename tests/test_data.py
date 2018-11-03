@@ -5,6 +5,8 @@ import numpy.testing as npt
 import tensorflow as tf
 from monty import data
 
+tf.enable_eager_execution()
+
 TEST_FILE_PATH = 'resources/PBMC_test.csv'
 
 
@@ -34,29 +36,23 @@ def test_download_file_present(mocker):
 
 
 def test_create_dataset():
-    sess = tf.Session()
     iterator = data.create_dataset("test_resources/PBMC_test.csv", 5, 1, False, None).batch(2).make_one_shot_iterator()
-    first_batch = sess.run(iterator.get_next())
-
-    npt.assert_array_equal(first_batch, np.array([[2, 1, 0, 1, 0], [0, 0, 0, 0, 0]], dtype=np.float32))
+    npt.assert_array_equal(iterator.get_next(), np.array([[2, 1, 0, 1, 0], [0, 0, 0, 0, 0]], dtype=np.float32))
 
 
 def test_drop_outliers():
-    sess = tf.Session()
     dataset = data.create_dataset("test_resources/PBMC_test.csv", 5, 1, False, None)
     non_outliers = data.drop_outliers(dataset, minimum_expressed_genes=1, minimum_library_size=100)
     iterator = non_outliers.batch(2).make_one_shot_iterator()
-    first_batch = sess.run(iterator.get_next())
+    first_batch = iterator.get_next()
 
     npt.assert_array_equal(first_batch, np.array([[41, 42, 43, 44, 45]], dtype=np.float32))
     assert first_batch.shape == (1, 5)
 
 
 def test_normalize_data():
-    sess = tf.Session()
-    dataset = data.create_dataset("test_resources/PBMC_test.csv", 5, 1, False, None)\
+    dataset = data.create_dataset("test_resources/PBMC_test.csv", 5, 1, False, None) \
         .batch(1)
     dataset = data.normalize_dataset(dataset)
     iterator = dataset.make_one_shot_iterator()
-    first_batch = sess.run(iterator.get_next())
-    npt.assert_allclose(first_batch[0], np.vectorize(lambda x: np.log(x + 1))([2, 1, 0, 1, 0]))
+    npt.assert_allclose(iterator.get_next()[0], np.vectorize(lambda x: np.log(x + 1))([2, 1, 0, 1, 0]))

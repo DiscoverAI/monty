@@ -1,11 +1,10 @@
 import tensorflow as tf
-import tensorflow.contrib.slim as slim
 
 from monty import FLAGS
 
 
 def encoder(x, training, num_latent_variables):
-    x = tf.layers.dense(x, 500,  activation=tf.nn.relu)
+    x = tf.layers.dense(x, 500, activation=tf.nn.relu)
     x = tf.layers.dense(x, num_latent_variables, activation=tf.nn.relu)
     return x
 
@@ -36,14 +35,15 @@ def _create_estimator_spec(labels, logits, learning_rate, mode):
     loss = tf.losses.mean_squared_error(labels, logits)
     if mode == tf.estimator.ModeKeys.TRAIN:
         train_op = \
-            tf.train.AdamOptimizer(beta1=0.5, learning_rate=learning_rate)\
-            .minimize(loss, global_step=tf.train.get_global_step())
+            tf.train.AdamOptimizer(beta1=0.5, learning_rate=learning_rate) \
+                .minimize(loss, global_step=tf.train.get_global_step())
 
     elif mode == tf.estimator.ModeKeys.EVAL:
         eval_metric_ops = {
             "rmse": tf.metrics.root_mean_squared_error(
                 tf.cast(labels, tf.float64), tf.cast(logits, tf.float64))
         }
+
     logging_hook = tf.train.LoggingTensorHook({"loss": loss}, every_n_iter=1)
     return tf.estimator.EstimatorSpec(
         mode=mode,
