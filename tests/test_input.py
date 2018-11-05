@@ -13,7 +13,7 @@ def test_input_function():
                                             minimum_library_size=0,
                                             num_features=5,
                                             shuffle=False)
-    x, y = noise_input_fn()
+    x, y = noise_input_fn(None)
     expected = data.normalize_op(
         tf.constant(
             [[2, 1, 0, 1, 0],
@@ -37,7 +37,7 @@ def test_noise_input_function():
                                             minimum_library_size=0,
                                             num_features=5,
                                             shuffle=False)
-    x, y = noise_input_fn()
+    x, y = noise_input_fn(None)
     expected = data.normalize_op(
         tf.constant(
             [[2, 1, 0, 1, 0],
