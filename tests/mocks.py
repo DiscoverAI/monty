@@ -2,7 +2,7 @@ import numpy as np
 import tensorflow as tf
 
 
-def mock_input_fn():
+def mock_input_fn(params):
     sequence = np.array([[[1, 1]]])
 
     def generator():

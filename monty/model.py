@@ -56,9 +56,9 @@ def _create_estimator_spec(labels, logits, learning_rate, mode):
         eval_metric_ops=eval_metric_ops)
 
 
-class AutoEncoder(tf.estimator.Estimator):
-    def __init__(self, learning_rate, model_dir, num_latent_variables, config=None):
-        def _model_fn(features, labels, mode):
+class AutoEncoder(tf.contrib.tpu.TPUEstimator):
+    def __init__(self, learning_rate, model_dir, num_latent_variables, config=tf.contrib.tpu.RunConfig()):
+        def _model_fn(features, labels, mode, params):
             logits = autoencoder(inputs=features, mode=mode, num_latent_variables=num_latent_variables)
             return _create_estimator_spec(
                 labels=labels,
@@ -70,5 +70,7 @@ class AutoEncoder(tf.estimator.Estimator):
         super(AutoEncoder, self).__init__(
             model_fn=_model_fn,
             model_dir=model_dir,
-            config=config
+            config=config,
+            use_tpu=FLAGS.use_tpu,
+            train_batch_size=FLAGS.batch_size
         )

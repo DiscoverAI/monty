@@ -21,7 +21,7 @@ class CorruptedInputFunction:
         self.shuffle = shuffle
         self.mask_percentage = mask_percentage
 
-    def __call__(self):
+    def __call__(self, params):
         dataset_file_path = data.download_if_not_present(self.dataset_path)
         dataset = data.create_dataset(dataset_file_path,
                                       num_features=self.num_features,
