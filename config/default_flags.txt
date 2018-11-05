@@ -7,5 +7,5 @@
 --minimum_library_size=50
 --minimum_expressed_genes=10
 --impute_iterations=20
---mask_percentage=20
+--mask_percentage=25
 --model_dir=out
