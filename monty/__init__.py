@@ -19,15 +19,15 @@ tf.app.flags.DEFINE_integer('num_features', 2700,
                             """Number of features (types of RNA transcripts) in the data.""")
 tf.app.flags.DEFINE_string('dataset_path', 'resources/PBMC.csv',
                            """Path to the dataset.""")
-tf.app.flags.DEFINE_integer('minimum_library_size', 50,
+tf.app.flags.DEFINE_integer('minimum_library_size', 1,
                             """Minimum sum of expressed genes that a measurement needs to have,
                             in order to be processed""")
-tf.app.flags.DEFINE_integer('minimum_expressed_genes', 10,
+tf.app.flags.DEFINE_integer('minimum_expressed_genes', 1,
                             """Minimum count of nonzero gene expression that a measurement needs to have,
                             in order to be processed""")
 tf.app.flags.DEFINE_integer('impute_iterations', 20,
                             """How many times the imputation should iterate at each step""")
-tf.app.flags.DEFINE_integer('mask_percentage', 20,
+tf.app.flags.DEFINE_integer('mask_percentage', 0,
                             """How many percent of nonzero measurements
                             should be masked during imputing autoencoder training""")
 tf.app.flags.DEFINE_string('model_dir', 'out',

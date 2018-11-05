@@ -1,17 +1,19 @@
+import monty.data as data
 import tensorflow as tf
-
 from monty import FLAGS
 
 
 def encoder(x, training, num_latent_variables):
-    x = tf.layers.dense(x, 500, activation=tf.nn.relu)
+    x = tf.layers.dense(x, 200, activation=tf.nn.relu)
+    x = tf.layers.batch_normalization(x, training=True)
     x = tf.layers.dense(x, num_latent_variables, activation=tf.nn.relu)
     return x
 
 
 def decoder(x, training):
-    x = tf.layers.dense(x, 500, activation=tf.nn.relu)
-    x = tf.layers.dense(x, FLAGS.num_features)
+    x = tf.layers.dense(x, 200, activation=tf.nn.relu)
+    x = tf.layers.batch_normalization(x, training=True)
+    x = tf.layers.dense(x, FLAGS.num_features, activation=tf.nn.relu)
     return x
 
 
@@ -23,7 +25,7 @@ def autoencoder(inputs, num_latent_variables, mode):
 
 
 def _create_estimator_spec(labels, logits, learning_rate, mode):
-    predictions = {"prediction": tf.round(logits)}
+    predictions = {"prediction": tf.round(data.denormalize_op(logits))}
 
     if mode == tf.estimator.ModeKeys.PREDICT:
         return tf.estimator.EstimatorSpec(
@@ -44,7 +46,7 @@ def _create_estimator_spec(labels, logits, learning_rate, mode):
                 tf.cast(labels, tf.float64), tf.cast(logits, tf.float64))
         }
 
-    logging_hook = tf.train.LoggingTensorHook({"loss": loss}, every_n_iter=1)
+    logging_hook = tf.train.LoggingTensorHook({"loss": loss}, every_n_iter=5)
     return tf.estimator.EstimatorSpec(
         mode=mode,
         predictions=predictions,
@@ -62,7 +64,8 @@ class AutoEncoder(tf.estimator.Estimator):
                 labels=labels,
                 logits=logits,
                 learning_rate=learning_rate,
-                mode=mode)
+                mode=mode
+            )
 
         super(AutoEncoder, self).__init__(
             model_fn=_model_fn,

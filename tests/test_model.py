@@ -39,5 +39,5 @@ def test_estimator():
     estimator.train(input_fn=mock_input_fn, steps=1000)
     prediction = estimator.predict(input_fn=mock_input_fn).__next__()
     assert prediction["prediction"].shape == (2,)
-    assert np.array_equal(prediction["prediction"], [1, 1])
+    assert np.array_equal(prediction["prediction"], np.round(data.denormalize_op([1.0, 1.0])))
     shutil.rmtree("tests/out")

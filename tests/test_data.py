@@ -56,3 +56,16 @@ def test_normalize_data():
     dataset = data.normalize_dataset(dataset)
     iterator = dataset.make_one_shot_iterator()
     npt.assert_allclose(iterator.get_next()[0], np.vectorize(lambda x: np.log(x + 1))([2, 1, 0, 1, 0]))
+
+
+def test_denormalize_data():
+    dataset = data.create_dataset("test_resources/PBMC_test.csv", 5, 1, False, None) \
+        .batch(1)
+    dataset = data.denormalize_dataset(dataset)
+    iterator = dataset.make_one_shot_iterator()
+    npt.assert_allclose(iterator.get_next()[0], np.vectorize(lambda x: np.exp(x) - 1)([2, 1, 0, 1, 0]))
+
+
+def test_denormalize_normalize_data():
+    assert [data.denormalize_op(data.normalize_op(x)).numpy() for x in [0.0, 1.0, 2.0, 3.0, 4.0, 5.0]] \
+           == [0.0, 1.0, 2.0, 3.0, 4.0, 5.0]

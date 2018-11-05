@@ -41,5 +41,13 @@ def normalize_op(value):
     return tf.log(value + 1)
 
 
+def denormalize_op(value):
+    return tf.exp(value) - 1
+
+
 def normalize_dataset(dataset):
     return dataset.map(normalize_op)
+
+
+def denormalize_dataset(dataset):
+    return dataset.map(denormalize_op)

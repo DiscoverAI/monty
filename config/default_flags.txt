@@ -8,3 +8,4 @@
 --minimum_expressed_genes=10
 --impute_iterations=20
 --mask_percentage=20
+--model_dir=out
