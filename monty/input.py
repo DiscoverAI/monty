@@ -37,7 +37,7 @@ class CorruptedInputFunction:
 
         corrupted = self._corrupt_input_data(input_data)
 
-        return tf.convert_to_tensor(corrupted), input_data
+        return corrupted, input_data
 
     def _corrupt_input_data(self, input_data):
         rand_indexes_of_nonzero = self._get_random_percentage_of_nonzero_indices(input_data)

@@ -16,4 +16,4 @@ def mock_input_fn():
     dataset = dataset.repeat(10000)
     iter = dataset.make_one_shot_iterator()
     el = iter.get_next()
-    return el, el
+    return el * 0, el

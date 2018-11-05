@@ -30,7 +30,7 @@ def test_autoencoder_model():
 
 
 def test_estimator():
-    """Tests if our model can learn the identity mapping of a constant dataset in 1000 steps"""
+    """Tests if our model can learn the mapping from [0] (corrupted) to [1] in 1000 steps"""
     if not os.path.exists("tests/out"):
         os.mkdir("tests/out")
     FLAGS.num_features = 2

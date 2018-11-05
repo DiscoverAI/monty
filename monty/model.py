@@ -5,15 +5,15 @@ from monty import FLAGS
 
 def encoder(x, training, num_latent_variables):
     x = tf.layers.dense(x, 200, activation=tf.nn.relu)
-    x = tf.layers.batch_normalization(x, training=True)
+    x = tf.layers.batch_normalization(x, training=training)
     x = tf.layers.dense(x, num_latent_variables, activation=tf.nn.relu)
     return x
 
 
 def decoder(x, training):
     x = tf.layers.dense(x, 200, activation=tf.nn.relu)
-    x = tf.layers.batch_normalization(x, training=True)
-    x = tf.layers.dense(x, FLAGS.num_features, activation=tf.nn.relu)
+    x = tf.layers.batch_normalization(x, training=training)
+    x = tf.layers.dense(x, FLAGS.num_features)
     return x
 
 
