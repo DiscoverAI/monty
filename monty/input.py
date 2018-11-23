@@ -34,9 +34,7 @@ class CorruptedInputFunction:
         iterator = dataset.batch(batch_size=self.batch_size, drop_remainder=True).make_one_shot_iterator()
 
         input_data = iterator.get_next()
-
         corrupted = self._corrupt_input_data(input_data)
-
         return corrupted, input_data
 
     def _corrupt_input_data(self, input_data):
@@ -47,5 +45,6 @@ class CorruptedInputFunction:
         randomized_nonzero_indices = tf.random_shuffle(
             tf.where(tf.not_equal(input_data, tf.constant(0, dtype=tf.float32))))
         first_dimension_size = get_size_along_first_dim(randomized_nonzero_indices)
-        return tf.slice(randomized_nonzero_indices, [0, 0],
-                        [int((self.mask_percentage / 100) * first_dimension_size), 2])
+        return tf.slice(randomized_nonzero_indices,
+                        begin=[0, 0],
+                        size=[int((self.mask_percentage / 100) * first_dimension_size), 2])
