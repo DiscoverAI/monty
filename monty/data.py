@@ -37,5 +37,17 @@ def drop_outliers(dataset, minimum_expressed_genes, minimum_library_size):
         .filter(lambda batch: tf.reduce_sum(batch) >= minimum_library_size)
 
 
-def normalize(dataset):
-    return dataset.map(lambda x: tf.log(x + 1))
+def normalize_op(value):
+    return tf.log(value + 1)
+
+
+def denormalize_op(value):
+    return tf.exp(value) - 1
+
+
+def normalize_dataset(dataset):
+    return dataset.map(normalize_op)
+
+
+def denormalize_dataset(dataset):
+    return dataset.map(denormalize_op)
